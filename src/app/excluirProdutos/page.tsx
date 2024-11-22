@@ -26,7 +26,7 @@ const ExcluirProduto = () => {
 
       setMensagem("Produto excluído com sucesso!");
       alert("Produto excluído com sucesso!");
-      setProdutoId(""); // Limpar o campo após excluir
+      setProdutoId(""); 
     } catch (error) {
       const appError = error as Error;
       console.error("Erro ao excluir o produto:", appError.message || "Erro desconhecido");

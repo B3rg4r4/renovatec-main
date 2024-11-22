@@ -45,7 +45,7 @@ const AdicionarProduto = () => {
         tipo: "",
         consumoEnergetico: 0,
         custoMensal: 0,
-      }); // Limpar o formulário após o envio
+      }); 
     } catch (error) {
       const appError = error as Error;
       console.error("Erro ao adicionar o produto:", appError.message || "Erro desconhecido");

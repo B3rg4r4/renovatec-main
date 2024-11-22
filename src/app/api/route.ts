@@ -1,10 +1,8 @@
 import { NextResponse } from "next/server";
 import { ErroRoute } from "@/types/types";
 
-// Base URL do backend Java
 const BASE_URL = "http://localhost:8080/produtos";
 
-// Função genérica para lidar com respostas do backend
 async function handleFetchResponse(response: Response) {
   if (!response.ok) {
     const errorText = await response.text();
@@ -13,7 +11,6 @@ async function handleFetchResponse(response: Response) {
   return response.json();
 }
 
-// GET - Listar Produtos
 export async function GET() {
   try {
     const response = await fetch(BASE_URL, {
@@ -34,7 +31,6 @@ export async function GET() {
   }
 }
 
-// POST - Cadastrar Produto
 export async function POST(request: Request) {
   try {
     const body = await request.json();
@@ -57,11 +53,10 @@ export async function POST(request: Request) {
   }
 }
 
-// PUT - Atualizar Produto
 export async function PUT(request: Request) {
   try {
     const body = await request.json();
-    const { id, ...produto } = body; // Certifique-se de enviar o ID junto com o payload
+    const { id, ...produto } = body; 
     const response = await fetch(`${BASE_URL}/${id}`, {
       method: "PUT",
       headers: {
@@ -81,11 +76,10 @@ export async function PUT(request: Request) {
   }
 }
 
-// DELETE - Excluir Produto
 export async function DELETE(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
-    const id = searchParams.get("id"); // Obter o ID do produto a ser excluído
+    const id = searchParams.get("id"); 
 
     if (!id) {
       throw new Error("ID do produto não fornecido");

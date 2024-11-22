@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 
-// Tipo para representar o Produto
 export type Produto = {
   id: number;
   nome: string;
@@ -15,7 +14,6 @@ const VerProdutos = () => {
   const [produtos, setProdutos] = useState<Produto[]>([]);
   const [erro, setErro] = useState("");
 
-  // Função para buscar todos os produtos
   const buscarProdutos = async () => {
     try {
       const response = await fetch("http://localhost:8080/produtos", {
@@ -23,10 +21,10 @@ const VerProdutos = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        mode: "cors", // FORÇA CORS
+        mode: "cors", 
       });
 
-      const status = response.status; // Log do status
+      const status = response.status; 
       console.log("Status:", status);
 
       if (!response.ok) {
@@ -34,7 +32,7 @@ const VerProdutos = () => {
       }
 
       const produtos: Produto[] = await response.json();
-      console.log("Produtos recebidos:", produtos); // Log dos produtos
+      console.log("Produtos recebidos:", produtos);
       setProdutos(produtos);
       setErro("");
     } catch (error) {
@@ -44,7 +42,6 @@ const VerProdutos = () => {
     }
   };
 
-  // Buscar produtos ao carregar a página
   useEffect(() => {
     buscarProdutos();
   }, []);
