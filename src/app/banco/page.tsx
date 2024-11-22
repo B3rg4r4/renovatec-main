@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 
 const Produtos = () => {
   const [acao, setAcao] = useState<
-    "criarProdutos" | "excluirProdutos" | "alteraProdutos" | ""
+    "criarProdutos" | "excluirProdutos" | "alterarProdutos" | ""
   >("");
   const router = useRouter();
 
@@ -39,7 +39,7 @@ const Produtos = () => {
                 e.target.value as
                   | "criarProdutos"
                   | "excluirProdutos"
-                  | "alteraProdutos"
+                  | "alterarProdutos"
               )
             }
             className="block w-full p-3 border border-yellow-500 rounded-md bg-black text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-500"
@@ -50,7 +50,7 @@ const Produtos = () => {
             </option>
             <option value="criarProdutos">Criar Produto</option>
             <option value="excluirProdutos">Excluir Produto</option>
-            <option value="alteraProdutos">Alterar Produto</option>
+            <option value="alterarProdutos">Alterar Produto</option>
             <option value="verProdutos">Ver Produto</option>
           </select>
         </div>
