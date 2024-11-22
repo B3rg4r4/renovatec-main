@@ -1,9 +1,8 @@
 "use client";
-import { RecebeDadosProd } from "@/types/types";
 import React, { useState } from "react";
 
-export default function Analise() {
-  const [dados, setDados] = useState<RecebeDadosProd>({
+export default function CadastroAnalise() {
+  const [dados, setDados] = useState({
     nome: "",
     tipo: "",
     consumoEnergetico: 0,
@@ -24,7 +23,7 @@ export default function Analise() {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
       if (!dados.nome || !dados.tipo) {
@@ -32,11 +31,28 @@ export default function Analise() {
         return;
       }
 
-      console.log(dados);
-      alert("Dados enviados com sucesso!");
+      const response = await fetch("http://localhost:8080/produtos", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(dados),
+      });
+
+      if (!response.ok) {
+        throw new Error("Erro ao cadastrar produto.");
+      }
+
+      alert("Produto cadastrado com sucesso!");
+      setDados({
+        nome: "",
+        tipo: "",
+        consumoEnergetico: 0,
+        custoMensal: 0,
+      });
     } catch (error) {
-      console.error("Erro ao enviar os dados:", error);
-      alert("Ocorreu um erro ao enviar os dados. Tente novamente.");
+      console.error("Erro ao cadastrar produto:", error);
+      alert("Ocorreu um erro ao cadastrar o produto. Tente novamente.");
     }
   };
 
@@ -45,17 +61,17 @@ export default function Analise() {
       <form
         onSubmit={handleSubmit}
         className="bg-black text-white p-6 rounded-lg shadow-lg w-96"
-        aria-label="formulario de análise"
+        aria-label="formulario de cadastro de analise"
       >
         <h1 className="text-2xl font-bold mb-6 text-yellow-500 text-center">
-          Cadastro de aparelho para analise
+          Cadastro de Produto para Análise
         </h1>
         <div className="mb-4">
           <label
             htmlFor="nome"
             className="block text-sm mb-2 text-white font-bold"
           >
-            Nome do Aparelho
+            Nome do Produto
           </label>
           <input
             type="text"
@@ -64,7 +80,7 @@ export default function Analise() {
             value={dados.nome}
             onChange={handleChange}
             className="w-full border border-yellow-500 bg-black text-white rounded px-3 py-2 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-500"
-            placeholder="Digite o nome do aparelho"
+            placeholder="Digite o nome do produto"
             required
           />
         </div>
@@ -73,7 +89,7 @@ export default function Analise() {
             htmlFor="tipo"
             className="block text-sm font-bold mb-2 text-white"
           >
-            Tipo de Aparelho
+            Tipo do Produto
           </label>
           <select
             id="tipo"
@@ -103,7 +119,7 @@ export default function Analise() {
             value={dados.consumoEnergetico}
             onChange={handleChange}
             className="w-full border border-yellow-500 bg-black text-white rounded px-3 py-2 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-500"
-            placeholder="Digite o consumo (kWh)"
+            placeholder="Digite o consumo energético (kWh)"
             required
           />
         </div>
@@ -129,7 +145,7 @@ export default function Analise() {
           type="submit"
           className="w-full bg-yellow-500 text-black font-bold py-2 px-4 rounded hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-700"
         >
-          Enviar
+          Cadastrar Produto
         </button>
       </form>
     </div>

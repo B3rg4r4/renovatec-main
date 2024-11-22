@@ -1,10 +1,16 @@
 "use client";
 import { useState } from "react";
-import { RecebeDadosProd } from "@/app/criarProdutos/page";
+
+export type Produto = {
+  nome: string;
+  tipo: string;
+  consumoEnergetico: number;
+  custoMensal: number;
+};
 
 const AlterarProduto = () => {
   const [produtoId, setProdutoId] = useState("");
-  const [dados, setDados] = useState<RecebeDadosProd>({
+  const [dados, setDados] = useState<Produto>({
     nome: "",
     tipo: "",
     consumoEnergetico: 0,
@@ -14,13 +20,31 @@ const AlterarProduto = () => {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     try {
-      console.log("Alterando produto ID:", produtoId);
-      const produtoExiste = true; // Simula verificação
-      if (!produtoExiste) throw new Error("Produto não encontrado!");
-      console.log("Novos dados do produto:", dados);
+      const response = await fetch(`http://localhost:8080/produtos/${produtoId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          nome: dados.nome,
+          tipo: dados.tipo,
+          consumoEnergetico: dados.consumoEnergetico,
+          custoMensal: dados.custoMensal,
+        }),
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(errorText || "Erro ao alterar o produto");
+      }
+
+      const updatedProduto = await response.json();
+      console.log("Produto alterado com sucesso:", updatedProduto);
+      alert("Produto alterado com sucesso!");
     } catch (error) {
       const appError = error as Error;
-      console.error(appError.message || "Erro desconhecido");
+      console.error("Erro ao alterar o produto:", appError.message || "Erro desconhecido");
+      alert(appError.message || "Erro ao alterar o produto.");
     }
   };
 
@@ -63,6 +87,64 @@ const AlterarProduto = () => {
             placeholder="Digite o novo nome do produto"
             value={dados.nome}
             onChange={(e) => setDados({ ...dados, nome: e.target.value })}
+            className="block w-full p-3 border border-yellow-500 rounded-md bg-black text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+          />
+        </div>
+        <div className="mb-6">
+          <label
+            htmlFor="tipo"
+            className="block text-sm font-bold mb-2 text-white"
+          >
+            Tipo
+          </label>
+          <input
+            type="text"
+            id="tipo"
+            placeholder="Digite o tipo do produto"
+            value={dados.tipo}
+            onChange={(e) => setDados({ ...dados, tipo: e.target.value })}
+            className="block w-full p-3 border border-yellow-500 rounded-md bg-black text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+          />
+        </div>
+        <div className="mb-6">
+          <label
+            htmlFor="consumoEnergetico"
+            className="block text-sm font-bold mb-2 text-white"
+          >
+            Consumo Energético (kWh)
+          </label>
+          <input
+            type="number"
+            id="consumoEnergetico"
+            placeholder="Digite o consumo energético"
+            value={dados.consumoEnergetico}
+            onChange={(e) =>
+              setDados({
+                ...dados,
+                consumoEnergetico: Number(e.target.value),
+              })
+            }
+            className="block w-full p-3 border border-yellow-500 rounded-md bg-black text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+          />
+        </div>
+        <div className="mb-6">
+          <label
+            htmlFor="custoMensal"
+            className="block text-sm font-bold mb-2 text-white"
+          >
+            Custo Mensal (R$)
+          </label>
+          <input
+            type="number"
+            id="custoMensal"
+            placeholder="Digite o custo mensal"
+            value={dados.custoMensal}
+            onChange={(e) =>
+              setDados({
+                ...dados,
+                custoMensal: Number(e.target.value),
+              })
+            }
             className="block w-full p-3 border border-yellow-500 rounded-md bg-black text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-500"
           />
         </div>

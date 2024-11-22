@@ -8,11 +8,30 @@ export type BancoProdExcluir = {
 
 const ExcluirProduto = () => {
   const [produtoId, setProdutoId] = useState("");
+  const [mensagem, setMensagem] = useState<string | null>(null);
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    console.log("Excluindo produto ID:", produtoId);
-    // Chamada para API em Java para excluir o produto
+    try {
+      const response = await fetch(`http://localhost:8080/produtos/${produtoId}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("Erro ao excluir o produto. Verifique o ID informado.");
+      }
+
+      setMensagem("Produto excluído com sucesso!");
+      alert("Produto excluído com sucesso!");
+      setProdutoId(""); // Limpar o campo após excluir
+    } catch (error) {
+      const appError = error as Error;
+      console.error("Erro ao excluir o produto:", appError.message || "Erro desconhecido");
+      setMensagem(appError.message || "Erro ao excluir o produto.");
+    }
   };
 
   return (
@@ -48,6 +67,12 @@ const ExcluirProduto = () => {
           Excluir Produto
         </button>
       </form>
+
+      {mensagem && (
+        <div className="bg-yellow-500 text-black p-4 rounded-md shadow-md w-96 mt-4 text-center">
+          {mensagem}
+        </div>
+      )}
     </div>
   );
 };
