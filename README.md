@@ -19,7 +19,7 @@ O objetivo é criar um sistema que ajuda os usuários a monitorar o consumo ener
 ## **Links importantes!!**
 
 - **Vercel:** [https://renovatec-main.vercel.app/](https://renovatec-main.vercel.app/)
-- **Vídeo de apresentação:** [https://www.youtube.com/](https://www.youtube.com/)
+- **Vídeo de apresentação:** [https://youtu.be/j3AL1p8Ogj8] (https://youtu.be/j3AL1p8Ogj8)
 - **JAVA:** [https://github.com/victornbm7405/JavaGS](https://github.com/victornbm7405/JavaGS)
 
 ---
@@ -73,5 +73,13 @@ O objetivo é criar um sistema que ajuda os usuários a monitorar o consumo ener
 ## **Estilização**
 - Projeto desenvolvido utilizando **Tailwind CSS**, garantindo:
   - Layout limpo e responsivo.  
-  - Agilidade na aplicação de estilos com classes utilitárias.  
+  - Agilidade na aplicação de estilos com classes utilitárias.
+    
+---
 
+## **API Java** ##
+
+- Passo a passo para utilizar api desenvolvida em java
+ - Baixar repositorio de java [https://github.com/victornbm7405/JavaGS] (https://github.com/victornbm7405/JavaGS)
+ - configurar cominho do banco de dados na pasta util (banco de dados dentro do pacote resourcers)
+ - rodar main 
