@@ -80,6 +80,6 @@ O objetivo é criar um sistema que ajuda os usuários a monitorar o consumo ener
 ## **API Java** ##
 
 - Passo a passo para utilizar api desenvolvida em java
- - Baixar repositorio de java [https://github.com/victornbm7405/JavaGS] (https://github.com/victornbm7405/JavaGS)
+ - Baixar repositorio de java [https://github.com/victornbm7405/JavaGS](https://github.com/victornbm7405/JavaGS)
  - configurar cominho do banco de dados na pasta util (banco de dados dentro do pacote resourcers)
  - rodar main 
