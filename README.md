@@ -19,7 +19,7 @@ O objetivo é criar um sistema que ajuda os usuários a monitorar o consumo ener
 ## **Links importantes!!**
 
 - **Vercel:** [https://renovatec-main.vercel.app/](https://renovatec-main.vercel.app/)
-- **Vídeo de apresentação:** [https://youtu.be/j3AL1p8Ogj8] (https://youtu.be/j3AL1p8Ogj8)
+- **Vídeo de apresentação:** [https://youtu.be/j3AL1p8Ogj8](https://youtu.be/j3AL1p8Ogj8)
 - **JAVA:** [https://github.com/victornbm7405/JavaGS](https://github.com/victornbm7405/JavaGS)
 
 ---
